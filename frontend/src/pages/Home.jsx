@@ -13,7 +13,7 @@ import { useSocket } from "../context/SocketContext";
 import avatar1 from "../assets/60111.jpg";
 import avatar2 from "../assets/10491830.jpg";
 import avatar3 from "../assets/img.jpg";
-
+//-----------------------------------------
 // ✅ Single avatars array (NO duplication)
 const avatars = [avatar1, avatar2, avatar3];
 
