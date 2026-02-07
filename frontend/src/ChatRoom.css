@@ -1,0 +1,571 @@
+/* =========================
+   Chat Room Container
+========================= */
+.chatroom {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border-left: 1px solid var(--border);
+    background-color: var(--bg-secondary);
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/* =========================
+   Header
+========================= */
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-tertiary);
+    color: var(--text-main);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-header .avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-header h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* 3-dot menu button */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+/* =========================
+   Dropdown Menu
+========================= */
+.menu-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    min-width: 180px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.menu-item {
+    padding: 10px;
+    font-size: 14px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.menu-dropdown input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-main);
+    color: var(--text-main);
+    border-radius: 4px;
+}
+
+.menu-dropdown input::placeholder {
+    color: var(--text-muted);
+}
+
+/* =========================
+   Messages Area
+========================= */
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scroll-behavior: smooth;
+}
+
+/* =========================
+   Message Bubble
+========================= */
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: var(--bg-tertiary);
+    color: var(--text-main);
+    align-self: flex-start;
+    word-wrap: break-word;
+}
+
+.message.own {
+    background-color: var(--primary);
+    color: var(--text-on-primary);
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* Sender name */
+.message .sender {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: block;
+    color: var(--text-main);
+}
+
+/* Timestamp */
+.timestamp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    display: block;
+    text-align: right;
+}
+
+/* =========================
+   Media Messages
+========================= */
+.message img.media {
+    max-width: 200px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.message audio {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.message a {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* =========================
+   Preview Before Sending
+========================= */
+.preview-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    margin: 5px;
+}
+
+.preview-image {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 6px;
+}
+
+.remove-preview {
+    background: var(--danger);
+    color: var(--text-on-danger);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+/* =========================
+   Input Area
+========================= */
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--bg-tertiary);
+    border-top: 1px solid var(--border);
+    gap: 6px;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    outline: none;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+.chat-input input[type="file"] {
+    display: none;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.send-btn {
+    background-color: var(--primary);
+    color: var(--text-on-primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.send-btn:disabled {
+    background-color: var(--disabled-btn);
+    cursor: not-allowed;
+}
+
+/* =========================
+   Emoji Picker
+========================= */
+.emoji-picker {
+    position: absolute;
+    bottom: 65px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.status {
+    margin-left: 4px;
+    font-size: 12px;
+    color: gray;
+    /* default color for sent/delivered */
+}
+
+.status.seen {
+    color: #f74f4f;
+    /* blue for seen */
+}
+
+.status.delivered {
+    color: gray;
+    /* gray for delivered */
+}
+
+/* Online/offline status in chat header */
+.status-indicator {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Add a colored dot before the text */
+.status-indicator::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    background-color: gray;
+    /* default offline color */
+}
+
+/* Online */
+.status-indicator.online {
+    color: green;
+}
+
+.status-indicator.online::before {
+    background-color: green;
+}
+
+/* Offline */
+.status-indicator.offline {
+    color: #999;
+}
+
+.status-indicator.offline::before {
+    background-color: #999;
+}
+
+/* =========================
+   Mobile Responsive Styles
+========================= */
+/* =========================
+   Mobile Responsive - ChatRoom
+========================= */
+@media only screen and (max-width: 768px) {
+
+    /* Chat header smaller */
+    .chat-header {
+        padding: 6px;
+        gap: 4px;
+    }
+
+    .chat-header h3 {
+        font-size: 0.95rem;
+    }
+
+    .chat-header .avatar-small {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* Messages area compact */
+    .messages {
+        flex: 1;
+        padding: 4px;
+        gap: 4px;
+        overflow-y: auto;
+    }
+
+    .message {
+        max-width: 85%;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 10px;
+    }
+
+    .message img.media {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Input area stacked and smaller */
+    .chat-input {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .chat-input input {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+
+    .send-btn {
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    /* Emoji picker */
+    .emoji-picker {
+        bottom: 50px;
+        left: 5px;
+        transform: scale(0.9);
+    }
+
+    /* Menu dropdown compact */
+    .menu-dropdown {
+        min-width: 140px;
+        top: 50px;
+        right: 5px;
+    }
+
+    .status {
+        margin-left: 4px;
+        font-size: 12px;
+        color: gray;
+        /* default color for sent/delivered */
+    }
+
+    .status.seen {
+        color: #f74f4f;
+        /* blue for seen */
+    }
+
+    .status.delivered {
+        color: gray;
+        /* gray for delivered */
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    /* =====================
+       Main Layout
+    ===================== */
+    .main-content {
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* =====================
+       Chat Area
+    ===================== */
+    .chat-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 6px;
+        border-radius: 0;
+        background: var(--bg-secondary);
+    }
+
+    /* =====================
+       Messages Section
+    ===================== */
+    .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px;
+        margin-bottom: 6px;
+    }
+
+    /* =====================
+       Chat Input (IMPORTANT)
+    ===================== */
+    .chat-input {
+        display: flex;
+        flex-direction: row;
+        /* 🔥 force horizontal */
+        align-items: center;
+        gap: 6px;
+        padding: 6px 8px;
+        border-top: 1px solid var(--border);
+        background: var(--bg-main);
+    }
+
+    .chat-input input {
+        flex: 1;
+        height: 40px;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
+    /* =====================
+       Icons (emoji, image, audio)
+    ===================== */
+    .icon-btn {
+        font-size: 20px;
+        padding: 6px;
+        min-width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* =====================
+       Send Button
+    ===================== */
+    .send-btn {
+        width: auto;
+        /* ❌ no full width */
+        height: 38px;
+        padding: 0 14px;
+        font-size: 14px;
+        border-radius: 20px;
+        /* WhatsApp feel */
+        white-space: nowrap;
+    }
+
+    /* =====================
+       Group Info (Mobile)
+    ===================== */
+    .group-info-panel {
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        padding: 8px;
+        box-shadow: none;
+        border-left: none;
+        z-index: 10000;
+    }
+
+    .group-info-header {
+        gap: 6px;
+        padding-bottom: 6px;
+    }
+
+    .group-info-header h3 {
+        font-size: 14px;
+    }
+
+    .group-info-body h4 {
+        font-size: 13px;
+        margin: 8px 0 6px;
+    }
+
+    .member {
+        gap: 6px;
+        padding: 4px 6px;
+    }
+
+    .member img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .member span {
+        font-size: 12px;
+    }
+
+    /* Online/offline status in chat header */
+    .status-indicator {
+        margin-left: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #555;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Add a colored dot before the text */
+    .status-indicator::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: gray;
+        /* default offline color */
+    }
+
+    /* Online */
+    .status-indicator.online {
+        color: green;
+    }
+
+    .status-indicator.online::before {
+        background-color: green;
+    }
+
+    /* Offline */
+    .status-indicator.offline {
+        color: #999;
+    }
+
+    .status-indicator.offline::before {
+        background-color: #999;
+    }
+
+
+}
